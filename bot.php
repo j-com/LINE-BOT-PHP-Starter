@@ -47,9 +47,11 @@ else if($arrJson['events'][0]['message']['text'] == "กินข้าวยั
   $arrPostData = array();
   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
   $arrPostData['messages'][0]['type'] = "text";
+  $arrPostData['messages'][1]['type'] = "text";
+  $arrPostData['messages'][2]['type'] = "text";
   $arrPostData['messages'][0]['text'] = "bot ที่ไหนที่กินข้าวได้";
-  $arrPostData['messages'][0]['text'] = "ถามไร โง่ๆ";
-  $arrPostData['messages'][0]['text'] = "@-@";
+  $arrPostData['messages'][1]['text'] = "ถามไร โง่ๆ";
+  $arrPostData['messages'][2]['text'] = "@-@";
   
 }else{
   $arrPostData = array();
