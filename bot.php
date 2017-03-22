@@ -43,11 +43,13 @@ else if($arrJson['events'][0]['message']['text'] == "มีส่วนลดอ
   $arrPostData['messages'][0]['text'] = "สามารถดูรายละเอียดได้ที่เว็บไซต์ : \n http://www.nca.co.th/money_tranfer.html";
   
 }
-else if($arrJson['events'][0]['message']['text'] == "กินข้างยัง"){
+else if($arrJson['events'][0]['message']['text'] == "กินข้าวยัง"){
   $arrPostData = array();
   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
   $arrPostData['messages'][0]['type'] = "text";
-  $arrPostData['messages'][0]['text'] = "ฉันเป็น  bot ไม่กินไม่ได้ เข้าใจป่ะ ";
+  $arrPostData['messages'][0]['text'] = "bot ที่ไหนที่กินข้าวได้";
+  $arrPostData['messages'][0]['text'] = "ถามไร โง่ๆ";
+  $arrPostData['messages'][0]['text'] = "@-@";
   
 }else{
   $arrPostData = array();
