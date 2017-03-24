@@ -1,6 +1,6 @@
 <?php
 
-	$channel_id = "1506876443";
+	$channel_id = ":1506876443";
 	$channel_secret = "u8db0554962e9f325d34ac1bac415d99e";
 	$channel_access_token = "tr/TwgTeCozujRLgi4aJVSFIl7bVurKwuBTt9VBPyhzTQTNe97e+N9LBi9w1WE27lO3gSKw/d3x8MWAyiW0ru8nlIeDkgcRMmV2Pu0JBz67+ZAfMcy4ddvruGbyni2IgANd13hRWFjLuGO+uH15fUQdB04t89/1O/w1cDnyilFU=";
 
@@ -160,3 +160,4 @@
 	}
 	return $myURL.$objID.'.'.$filenameExtension;
 }
+?>
