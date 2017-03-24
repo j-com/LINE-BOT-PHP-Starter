@@ -1,10 +1,12 @@
 <?php
-$dbhost = 'localhost';
-$dbuser = 'root';
-$dbpass = '1234';
-
-$conn = mysql_connect($dbhost, $dbuser, $dbpass) or die ('Error connecting to mysql');
-
-$dbname = 'test';
-mysql_select_db($dbname);
+    	$con = mysql_connect('localhost', 'root', '1234');
+	if (!$con) {
+		die('err:' . mysql_error);
+	}
+	mysql_select_db('test', $con);
+	$result = mysql_query('select * from files');
+	while($row = mysql_fetch_array($result)){
+		echo $row['FilesID'];
+	}
+	mysql_close($con);
 ?>
