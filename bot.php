@@ -76,7 +76,7 @@
 		switch($content_type) {
 		
 			case "text" :
-				$content_type = "文字訊息";
+				$content_type = "1111";
 				$data = ["to" => $from, "messages" => array(["type" => "text", "text" => $message])];
 				break;
 				
