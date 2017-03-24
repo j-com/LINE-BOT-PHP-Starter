@@ -80,7 +80,7 @@
 				$message = "Hello";
 				$message1 = "My name is BOTT";
 				$data = ["to" => $from, "messages" => array(["type" => "text", "text" => $message])];
-				$data = ["to" => $from, "messages" => array(["type" => "text", "text" => $message1])];
+				$data1 = ["to" => $from, "messages" => array(["type" => "text", "text" => $message1])];
 				break;
 				
 			case "image" :
