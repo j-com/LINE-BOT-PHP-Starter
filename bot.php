@@ -77,8 +77,15 @@
 		
 			case "text" :
 				$content_type = "text";
-				$message = "Hello";
-				$data = ["to" => $from, "messages" => array(["type" => "text", "text" => $message])];
+				//$message = "Hello";
+				
+				if($message == "Hello"){
+					$messag = "Hi";
+				}else{
+					$messag = "Ummmm";
+				}
+				
+				$data = ["to" => $from, "messages" => array(["type" => "text", "text" => $messag])];
 				break;
 				
 			case "image" :
