@@ -83,7 +83,7 @@
 			case "image" :
 				$content_type = "圖片訊息";
 				$message = getObjContent("jpeg");   // 讀取圖片內容
-				$data = ["to" => $from, "messages" => array(["type" => "image", "originalContentUrl" => $message, "previewImageUrl" => $message])];
+				$data = ["to" => $from, "messages" => array(["type" => "image", "originalContentUrl" => $message, "previewImageUrl" => "Hello"])];
 				break;
 				
 			case "video" :
