@@ -1,10 +1,10 @@
 <?php
 
-	$channel_id = ":1506876443";
+	$channel_id = "1506876443";
 	$channel_secret = "u8db0554962e9f325d34ac1bac415d99e";
 	$channel_access_token = "tr/TwgTeCozujRLgi4aJVSFIl7bVurKwuBTt9VBPyhzTQTNe97e+N9LBi9w1WE27lO3gSKw/d3x8MWAyiW0ru8nlIeDkgcRMmV2Pu0JBz67+ZAfMcy4ddvruGbyni2IgANd13hRWFjLuGO+uH15fUQdB04t89/1O/w1cDnyilFU=";
 
-	$myURL = "https://cryptic-tor-86469.herokuapp.com/bot.php"
+	$myURL = "https://cryptic-tor-86469.herokuapp.com/bot.php";
 
 
 //  
@@ -58,8 +58,9 @@
 	//[Text, Image, Video, Audio, Location, Sticker]
 	$content_type = $receive->events[0]->message->type;
 	
-
-	$header = ["Content-Type: application/json", "Authorization: Bearer {" . $channel_access_token . "}"];
+	$header = array();
+	$header[] = "Content-Type: application/json"; 
+	$header[] = "Authorization: Bearer {".$channel_access_token."}";
 
 	reply($content_type, $text);
 	
@@ -160,4 +161,3 @@
 	}
 	return $myURL.$objID.'.'.$filenameExtension;
 }
-?>
