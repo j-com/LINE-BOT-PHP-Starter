@@ -1,75 +1,47 @@
-<?PHP
-$strAccessToken = "tr/TwgTeCozujRLgi4aJVSFIl7bVurKwuBTt9VBPyhzTQTNe97e+N9LBi9w1WE27lO3gSKw/d3x8MWAyiW0ru8nlIeDkgcRMmV2Pu0JBz67+ZAfMcy4ddvruGbyni2IgANd13hRWFjLuGO+uH15fUQdB04t89/1O/w1cDnyilFU=";
- 
+<?php
+$access_token = 'tr/TwgTeCozujRLgi4aJVSFIl7bVurKwuBTt9VBPyhzTQTNe97e+N9LBi9w1WE27lO3gSKw/d3x8MWAyiW0ru8nlIeDkgcRMmV2Pu0JBz67+ZAfMcy4ddvruGbyni2IgANd13hRWFjLuGO+uH15fUQdB04t89/1O/w1cDnyilFU=';
+
+// Get POST body content
 $content = file_get_contents('php://input');
-$arrJson = json_decode($content, true);
- 
-$strUrl = "https://api.line.me/v2/bot/message/reply";
- 
-$arrHeader = array();
-$arrHeader[] = "Content-Type: application/json";
-$arrHeader[] = "Authorization: Bearer {$strAccessToken}";
- 
-if($arrJson['events'][0]['message']['text'] == "สวัสดี" || $arrJson['events'][0]['message']['text'] == "หวัดดี"){
-  $arrPostData = array();
-  $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-  $arrPostData['messages'][0]['type'] = "text";
-  $arrPostData['messages'][0]['text'] = "สวัสดี  \n ฉันชื่อว่า J-com เป็น bot \n เชิญถามได้เลย";
-  
-}else if($arrJson['events'][0]['message']['text'] == "ชื่ออะไร"){
-  $arrPostData = array();
-  $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-  $arrPostData['messages'][0]['type'] = "text";
-  $arrPostData['messages'][0]['text'] = "ก็บอกว่าชื่อ J-com ไง เป็นปลาทองรึไง";
-  
-}else if($arrJson['events'][0]['message']['text'] == "ทำอะไรได้บ้าง"){
-  $arrPostData = array();
-  $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-  $arrPostData['messages'][0]['type'] = "text";
-  $arrPostData['messages'][0]['text'] = "ฉันมีหน้าที่แค่ตอบคำถาม";
-  
+// Parse JSON
+$events = json_decode($content, true);
+// Validate parsed JSON data
+if (!is_null($events['events'])) {
+	// Loop through each event
+	foreach ($events['events'] as $event) {
+		// Reply only when message sent is in 'text' format
+		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
+			// Get text sent
+			$text = $event['message']['text'];
+			// Get replyToken
+			$replyToken = $event['replyToken'];
+
+			// Build message to reply back
+			$messages = [
+				'type' => 'text',
+				'text' => $text
+			];
+
+			// Make a POST Request to Messaging API to reply to sender
+			$url = 'https://api.line.me/v2/bot/message/reply';
+			$data = [
+				'replyToken' => $replyToken,
+				'messages' => [$messages],
+			];
+			$post = json_encode($data);
+			$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+
+			$ch = curl_init($url);
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+			$result = curl_exec($ch);
+			curl_close($ch);
+
+			echo $result . "\r\n";
+		}
+	}
 }
-else if($arrJson['events'][0]['message']['text'] == "ตัวรถราคาเท่าไร"){
-  $arrPostData = array();
-  $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-  $arrPostData['messages'][0]['type'] = "text";
-  $arrPostData['messages'][0]['text'] = "ติดต่อ call center 1624";
-  
-}
-else if($arrJson['events'][0]['message']['text'] == "มีส่วนลดอะไรบ้าง"){
-  $arrPostData = array();
-  $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-  $arrPostData['messages'][0]['type'] = "text";
-  $arrPostData['messages'][0]['text'] = "สามารถดูรายละเอียดได้ที่เว็บไซต์ : \n http://www.nca.co.th/money_tranfer.html";
-  
-}
-else if($arrJson['events'][0]['message']['text'] == "กินข้าวยัง"){
-  $arrPostData = array();
-  $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-  $arrPostData['messages'][0]['type'] = "text";
-  $arrPostData['messages'][1]['type'] = "text";
-  $arrPostData['messages'][2]['type'] = "text";
-  $arrPostData['messages'][0]['text'] = "bot ที่ไหนที่กินข้าวได้";
-  $arrPostData['messages'][1]['text'] = "ถามไร โง่ๆ";
-  $arrPostData['messages'][2]['text'] = "@-@";
-  
-}else{
-  $arrPostData = array();
-  $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-  $arrPostData['messages'][0]['type'] = "text";
-  $arrPostData['messages'][0]['text'] = "ขอทวนคำถาม";
-}
- 
- 
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL,$strUrl);
-curl_setopt($ch, CURLOPT_HEADER, false);
-curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_HTTPHEADER, $arrHeader);
-curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($arrPostData));
-curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-$result = curl_exec($ch);
-curl_close ($ch);
- 
-?>
+echo "OK";
