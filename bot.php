@@ -79,8 +79,8 @@
 				$content_type = "text";
 				//$message = "Hello";
 				
-				if($message == "Hello (hmph)"){
-					$messag = "Hi";
+				if($message == "Hello"){
+					$messag = "Hi  (hmph)";
 				}else{
 					$messag = "Ummmm";
 				}
