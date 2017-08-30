@@ -80,7 +80,7 @@
 				//$message = "Hello";
 				
 				if($message == "Hello"){
-					$messag = "Hi  (hmph)";
+					$messag = "Hi  <3 ";
 				}else{
 					$messag = "Ummmm";
 				}
