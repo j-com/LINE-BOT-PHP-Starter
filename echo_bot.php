@@ -16,7 +16,8 @@
  * under the License.
  */
 
-require_once('./LINEBotTiny.php');
+//require_once('./LINEBotTiny.php');
+include ('LINEBotTiny.php');
 
 $channelAccessToken = '8f6cfd748b65830a8719a4ddc2d584b5";
 	$channel_access_token = "OscfTA2RG7Ilr6xCXrsUoKa75HSjkP839FxNZZxBkqS1s8RAZkC2HQIKvodPfXyflO3gSKw/d3x8MWAyiW0ru8nlIeDkgcRMmV2Pu0JBz64ggodG7wR6c4Bq/5xM/SV8DSGMreVGGrK5hIGByqSwXgdB04t89/1O/w1cDnyilFU=';
